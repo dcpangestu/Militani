@@ -1,44 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+ 
+    <meta charset="UTF-8">
     <title>Miltani</title>
+
+    <style> 
+            .form-group { 
+
+                text-align: center;  
+            } 
+    </style> 
 </head>
 
 <body>
-    <div class="Title">
-        <h1>Miltani</h1>
-        <h2>helping you choose your next crop</h2>
+    <div class="jumbotron p-3">
+    <div class="well text-center">
+        <h1>Decision Support System - Miltani </h1>
     </div>
 
-    <div class="form">
-        <form action="/result" method="POST"><br>
-            <label for="x">Choose x:</label>
-            <input list="xs" name="x" id="x"><br>
+    <div class="container">
+        <div class="row">
+            <div class="col md-6">
+                <div class="jumbotron">
+                    <h2>Manage <b>Plant </b> </h2>                
+                    <div class="form">
+                        <form action="/result" method="POST">
+                            <label for="sumberdaya">Sumber Daya manusia:</label>
+                            <select id="sumberdaya" name="sumberdaya">
+                                <option value="Tersedia">Tersedia</option>
+                                <option value="Beberapa">Beberapa</option>
+                                <option value="Tidak Tersedia">Tidak Tersedia</option>
+                            </select>
+                            <br>
 
-            <label for="x">Choose x:</label>
-            <input list="xs" name="x" id="x"><br>
+                            <label for="investasi">Investasi:</label>
+                            <select id="investasi" name="investasi">
+                                <option value="Besar">Besar</option>
+                                <option value="Kecil">Kecil</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                            </select>
+                            <br>
 
-            <label for="x">Choose x:</label>
-            <input list="xs" name="x" id="x"><br>
+                            <label for="keuangan">Keuangan:</label>
+                            <select id="keuangan" name="keuangan">
+                                <option value="< 1.000.000">< 1.000.000</option>
+                                <option value="1.000.000 - 3.000.000">1.000.000 - 3.000.000</option>
+                                <option value="> 3.000.000">> 3.000.000</option>
+                            </select>
+                            <br>
 
-            <label for="x">Choose x:</label>
-            <input list="xs" name="x" id="x"><br>
+                            <label for="pengetahuan">Pengetahuan:</label>
+                            <select id="pengetahuan" name="pengetahuan">
+                                <option value="Banyak">Banyak</option>
+                                <option value="Sesuatu">Sesuatu</option>
+                                <option value="Tidak Ada yang Dipelajari">Tidak Ada yang Dipelajari</option>
+                            </select>
+                            <br>
 
-            <label for="x">Choose x:</label>
-            <input list="xs" name="x" id="x"><br>
-
-            
-            <datalist id="xs">
-                <option value="Internet Explorer">
-                <option value="Firefox">
-                <option value="Chrome">
-                <option value="Opera">
-                <option value="Safari">
-            </datalist>
-
-            <button type="submit">Submit</button>
-        </form>
-    </div>    
+                            <button type="submit">See Recomendation</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
 </body>
 
 </html>

@@ -3,8 +3,23 @@ from Militani import app, db
 from Militani.forms import CriteriaForm
 from Militani.models import Implementasi, Keuntungan, Rancangan
 from flask_session import Session
+import numpy as np
 import urllib.request
 import pickle
+
+def oneHot(var):
+    enc = []
+    feat_col = ['Memungkinkan', 'Mudah', 'Sangat Sulit', 'Impas', 'Kerugian Tinggi', 'Rugi', 'Untung Sedang', 'Untung Tinggi']
+    for feat in feat_col:
+        if feat in var:
+            enc.append(1)
+        else:
+            enc.append(0)
+
+    enc = np.asarray(enc)
+    enc = enc.reshape(1, -1)
+    return enc
+
 
 @app.route('/')
 def home():
@@ -14,10 +29,11 @@ def home():
 def results():
     form = request.form
     if request.method == 'POST':
-        model = pickle.load("/models/model_militani.sav")
-        var = form['year']
+        with open("Militani/models/model_miltani.sav","rb") as f:
+            model = pickle.load(f)
+        var = oneHot(form)
         plant = model.predict(var)
-        return render_template('result.html', plant=plant)
+        return render_template('recomend.html', plant=plant)
 
 @app.route('/rancangan')
 def rancangan():

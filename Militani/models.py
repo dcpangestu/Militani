@@ -18,7 +18,7 @@ class Keuntungan(db.Model):
     keuntungan = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        return '{} {} {} {}'.format(self.rules, self.pengetahuan, self.keuangan, keuntungan)
+        return '{} {} {} {}'.format(self.rules, self.pengetahuan, self.keuangan, self.keuntungan)
 
 class Rancangan(db.Model):
     id = db.Column(db.Integer, primary_key=True)
