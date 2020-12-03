@@ -33,19 +33,21 @@ def results():
     print(form.pengetahuan.data)
     print(form.keuangan.data)
 
-    implementasi = Implementasi.query.filter_by(sumberdaya=form.sumberdaya.data, investasi=form.investasi.data).first()
+    implementasi = Implementasi.query.filter_by(sumberdaya=form.sumberdaya.data, investasi=form.investasi.data).first().implementasi
     print(implementasi)
 
-    keuntungan = Keuntungan.query.filter_by(pengetahuan=form.pengetahuan.data, keuangan=form.keuangan.data).first()
+    keuntungan = Keuntungan.query.filter_by(pengetahuan=form.pengetahuan.data, keuangan=form.keuangan.data).first().keuntungan
     print(keuntungan)
     
-    rancangan = Rancangan.query.filter_by(implementasi=implementasi, keuntungan=keuntungan).first()
+    rancangan = Rancangan.query.filter_by(implementasi=implementasi, keuntungan=keuntungan).first().rancangan
     print(rancangan)
 
     with open("Militani/models/model_miltani.sav","rb") as f:
         model = pickle.load(f)
     var = oneHot([implementasi, keuntungan])
     plant = model.predict(var)
+    plant = plant[0]
+    print(plant)
 
     return render_template('recomend.html', imp=implementasi, ktg=keuntungan, rcg=rancangan, title=rancangan, plant=plant)
 
