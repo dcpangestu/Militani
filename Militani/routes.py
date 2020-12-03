@@ -27,13 +27,27 @@ def home():
 
 @app.route('/result', methods=['POST'])
 def results():
-    form = request.form
-    if request.method == 'POST':
-        with open("Militani/models/model_miltani.sav","rb") as f:
-            model = pickle.load(f)
-        var = oneHot(form)
-        plant = model.predict(var)
-        return render_template('recomend.html', plant=plant)
+    form = CriteriaForm()
+    print(form.sumberdaya.data)
+    print(form.investasi.data)
+    print(form.pengetahuan.data)
+    print(form.keuangan.data)
+
+    implementasi = Implementasi.query.filter_by(sumberdaya=form.sumberdaya.data, investasi=form.investasi.data).first()
+    print(implementasi)
+
+    keuntungan = Keuntungan.query.filter_by(pengetahuan=form.pengetahuan.data, keuangan=form.keuangan.data).first()
+    print(keuntungan)
+    
+    rancangan = Rancangan.query.filter_by(implementasi=implementasi, keuntungan=keuntungan).first()
+    print(rancangan)
+
+    with open("Militani/models/model_miltani.sav","rb") as f:
+        model = pickle.load(f)
+    var = oneHot([implementasi, keuntungan])
+    plant = model.predict(var)
+
+    return render_template('recomend.html', imp=implementasi, ktg=keuntungan, rcg=rancangan, title=rancangan, plant=plant)
 
 @app.route('/rancangan')
 def rancangan():
