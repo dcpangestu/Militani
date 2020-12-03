@@ -1,4 +1,4 @@
-from Militani import db
+from Miltani import db
 
 class Implementasi(db.Model):
     id = db.Column(db.Integer, primary_key=True)

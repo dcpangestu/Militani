@@ -1,10 +1,8 @@
-from flask import render_template, url_for, flash, redirect, request, json
-from Militani import app, db
-from Militani.forms import CriteriaForm
-from Militani.models import Implementasi, Keuntungan, Rancangan
-from flask_session import Session
+from flask import render_template
+from Miltani import app
+from Miltani.forms import CriteriaForm
+from Miltani.models import Implementasi, Keuntungan, Rancangan
 import numpy as np
-import urllib.request
 import pickle
 
 def oneHot(var):
@@ -42,7 +40,7 @@ def results():
     rancangan = Rancangan.query.filter_by(implementasi=implementasi, keuntungan=keuntungan).first().rancangan
     print(rancangan)
 
-    with open("Militani/models/model_miltani.sav","rb") as f:
+    with open("Miltani/models/model_miltani.sav","rb") as f:
         model = pickle.load(f)
     var = oneHot([implementasi, keuntungan])
     plant = model.predict(var)
